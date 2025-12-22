@@ -1,12 +1,26 @@
 {
-  "manifest_version": 3,
-  "name": "Hide annoying iframe",
+  "manifest_version": 2,
+  "name": "Secret4u mobile",
   "version": "1.0.0",
   "description": "Hides a specific iframe on page load",
+
+  "browser_action": {
+    "default_title": "Secret4u mobile",
+    "default_icon": {
+      "16": "icons/inactive-16.png",
+      "32": "icons/inactive-32.png"
+    }
+  },
+
+  "background": {
+    "scripts": ["dist/background.js"],
+    "type": "module"
+  },
+
   "content_scripts": [
     {
       "matches": ["https://example.com/*"],
-      "js": ["content.js"],
+      "js": ["dist/content.js"],
       "run_at": "document_idle"
     }
   ]
