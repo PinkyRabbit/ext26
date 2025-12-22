@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Hide annoying iframe",
+  "version": "1.0.0",
+  "description": "Hides a specific iframe on page load",
+  "content_scripts": [
+    {
+      "matches": ["https://example.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
