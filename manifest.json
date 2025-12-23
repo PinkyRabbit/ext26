@@ -4,6 +4,15 @@
   "version": "1.0.0",
   "description": "Hides a specific iframe on page load",
 
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "usesa@secret4u.ru",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+
   "browser_action": {
     "default_title": "Secret4u mobile",
     "default_icon": {
