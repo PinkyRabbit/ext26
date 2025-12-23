@@ -30,7 +30,7 @@ browser.runtime.onMessage.addListener((msg, sender) => {
         setIcon(tabId, "active");
     }
 
-    if (msg.type === "IFRAME_REMOVED") {
+    if (msg.type === "SCRIPT_COMPLETED") {
         setIcon(tabId, "done");
     }
 });

@@ -1,25 +1,21 @@
-(function () {
-    const IFRAME_SRC_PART = "annoying-widget"; // FIXME: iframe id
-
-    function hideIframe() {
-        const iframes = document.querySelectorAll("iframe");
-        for (const f of iframes) {
-            const src = f.getAttribute("src") || "";
-            if (src.includes(IFRAME_SRC_PART)) {
-                f.style.display = "none";
-                return true;
-            }
-        }
-        return false;
+function collapseAugustMenu(): void {
+    try {
+        const mainFrame = document.querySelector("frame")
+        const frameset = mainFrame.contentDocument.getElementsByTagName("frameset")[0];
+        const framesetRows = frameset.getAttribute("rows");
+        const parts = framesetRows.split(",").map(s => s.trim());
+        parts[0] = "0";
+        frameset.setAttribute("rows", parts.join(","));
+    } catch (err) {
+        console.log("Error in collapseAugustMenu:");
+        console.error(err)
     }
+}
+(async function () {
+    await browser.runtime.sendMessage({ type: "DOMAIN_MATCHED" });
 
-    if (hideIframe()) return;
-
-    const obs = new MutationObserver(() => {
-        if (hideIframe()) obs.disconnect();
-    });
-
-    obs.observe(document.documentElement, { childList: true, subtree: true });
-
-    setTimeout(() => obs.disconnect(), 10000);
+    setTimeout(async () => {
+        collapseAugustMenu();
+        await browser.runtime.sendMessage({ type: "SCRIPT_COMPLETED" });
+    }, 1000);
 })();

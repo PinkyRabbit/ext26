@@ -2,24 +2,20 @@ import esbuild from "esbuild";
 
 const watch = process.argv.includes("--watch");
 
-await esbuild.build({
-    entryPoints: ["src/content.ts"],
+const common = {
+    entryPoints: ["src/content.ts", "src/background.ts"],
     outdir: "dist",
-    bundle: false,
+    bundle: true,
     sourcemap: true,
     target: ["es2020"],
-    format: "esm"
-});
+    platform: "browser",
+    format: "iife" // ✅ для MV2
+};
 
 if (watch) {
-    const ctx = await esbuild.context({
-        entryPoints: ["src/content.ts"],
-        outdir: "dist",
-        bundle: false,
-        sourcemap: true,
-        target: ["es2020"],
-        format: "esm"
-    });
+    const ctx = await esbuild.context(common);
     await ctx.watch();
     console.log("watching...");
+} else {
+    await esbuild.build(common);
 }
