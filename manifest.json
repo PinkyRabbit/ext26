@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Secret4u mobile",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hides a specific iframe on page load",
 
   "browser_specific_settings": {
@@ -22,8 +22,7 @@
   },
 
   "background": {
-    "scripts": ["dist/background.js"],
-    "type": "module"
+    "scripts": ["dist/background.js"]
   },
 
   "content_scripts": [
